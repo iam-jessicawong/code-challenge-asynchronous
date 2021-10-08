@@ -14,8 +14,9 @@ export const getPost = async (post_id) => {
     let data = await response.json()
     return data
   } catch(error) {
-    console.log("Not Found")
-    return "Not Found"
+    /* console.log("Not Found")
+    return "Not Found" */
+    throw error
   }
 };
 
@@ -27,7 +28,7 @@ export const getPostComments = async (post_id) => {
     let data = await response.json()
     return data
   } catch(error) {
-
+    throw error
   }
 };
 
@@ -39,7 +40,7 @@ export const getAuthor = async (user_id) => {
     let data = await response.json()
     return data
   } catch(error) {
-
+    throw error
   }
 };
 
