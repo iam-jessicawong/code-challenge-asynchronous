@@ -1,4 +1,8 @@
-const params; // tempat menampung parameter yang ada
+import { getPost, getRandomPic, getPostComments, getAuthor, getRandomProfile } from './helpers.js';
+
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString);
+const params = urlParams.get('post_id'); // tempat menampung parameter yang ada
 
 const elPageTitle = document.querySelector('#page-title');
 const elDetailBerita = document.querySelector('#detail-berita');
@@ -33,6 +37,27 @@ const createListElement = (comment) => {
 
 const renderPost = async () => {
   // EDIT HERE
+  try {
+    const post = await getPost(params)
+    const comments = await getPostComments(params)
+    const author = await getAuthor(post.userId)
+    const img = await getRandomPic()
+    const profPic = await getRandomProfile()
+    
+    console.log(post)
+    elLoading.classList.add('d-none')
+    elDetailBerita.classList.remove('d-none')
+    elPageTitle.textContent = post.title
+    elCardImg.setAttribute('src', img)
+    elCardText.textContent = post.body
+    elCardAuthorImg.setAttribute('src', profPic)
+    elCardAuthorName.textContent = author.name
+    elCardAuthorEmail.textContent = author.email
+
+    comments.map(comment => elListGroup.appendChild(createListElement(comment)))
+  } catch (error) {
+    throw elNotFound.classList.remove("d-none")
+  }
 };
 
 renderPost();
