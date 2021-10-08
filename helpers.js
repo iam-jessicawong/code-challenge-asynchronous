@@ -8,14 +8,39 @@ export const getPosts = async () => {
 
 export const getPost = async (post_id) => {
   // EDIT HERE
+  try {
+    const url = `https://jsonplaceholder.typicode.com/posts/${post_id}`
+    let response = await fetch(url)
+    let data = await response.json()
+    return data
+  } catch(error) {
+    console.log("Not Found")
+    return "Not Found"
+  }
 };
 
 export const getPostComments = async (post_id) => {
   // EDIT HERE
+  try {
+    const url = `https://jsonplaceholder.typicode.com/comments?postId=${post_id}`
+    let response = await fetch(url)
+    let data = await response.json()
+    return data
+  } catch(error) {
+
+  }
 };
 
 export const getAuthor = async (user_id) => {
   // EDIT HERE
+  try {
+    const url = `https://jsonplaceholder.typicode.com/users/${user_id}`
+    let response = await fetch(url)
+    let data = await response.json()
+    return data
+  } catch(error) {
+
+  }
 };
 
 export const getPostsByAuthor = async (author_id) => {
