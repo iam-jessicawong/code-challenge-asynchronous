@@ -45,6 +45,8 @@ const renderPost = async () => {
     const profPic = await getRandomProfile()
     
     console.log(post)
+    console.log(author)
+
     elLoading.classList.add('d-none')
     elDetailBerita.classList.remove('d-none')
     elPageTitle.textContent = post.title
@@ -52,6 +54,7 @@ const renderPost = async () => {
     elCardText.textContent = post.body
     elCardAuthorImg.setAttribute('src', profPic)
     elCardAuthorName.textContent = author.name
+    elCardAuthorName.href = `/author.html?author_id=${author.id}`
     elCardAuthorEmail.textContent = author.email
 
     comments.map(comment => elListGroup.appendChild(createListElement(comment)))
