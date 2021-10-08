@@ -75,3 +75,28 @@ export const getRandomProfile = async () => {
     throw error;
   }
 };
+
+export const createComment = async (comment) => {
+  const url = "https://jsonplaceholder.typicode.com/comments"
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(comment),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    }
+  })
+  
+  if(response.status === 201) {
+    alert('berhasil menambahkan komentar')
+  }
+  else {
+    alert('gagal menambahkan komentar')
+  }
+}
+
+export const removeComment = async (comment_id) => {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/comments/${comment_id}`, {
+    method: 'DELETE',
+  });
+  console.log(response)
+}

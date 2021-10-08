@@ -71,7 +71,90 @@
         </div>
         <div id="komentar-berita" class="col-xs-12 col-sm-6 mb-3">
           <ul id="list-group" class="list-group w-100"></ul>
+          <button
+          id="btn-new-comment"
+          class="btn btn-outline-primary w-100 text-capitalize"
+          data-bs-toggle="modal"
+          data-bs-target="#new-comment-modal"
+          >
+            create new comment
+          </button>
+
         </div>
+
+        <div
+          class="modal fade"
+          id="new-comment-modal"
+          tabindex="-1"
+          aria-labelledby="new-comment-modal"
+          aria-hidden="true"
+          >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Comment</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="form-new-comment">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">
+                      Name
+                    </label>
+                    <input
+                      type="name"
+                      name="name"
+                      class="form-control"
+                      id="namme"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      id="email"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="body" class="form-label">
+                      Comment
+                    </label>
+                    <textarea
+                      name="body"
+                      id="body"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-success text-capitalize"
+                    >
+                      submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 

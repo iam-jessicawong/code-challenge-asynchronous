@@ -1,4 +1,4 @@
-import { getPost, getRandomPic, getPostComments, getAuthor, getRandomProfile } from './helpers.js';
+import { getPost, getRandomPic, getPostComments, getAuthor, getRandomProfile, createComment } from './helpers.js';
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString);
@@ -17,7 +17,7 @@ const elListGroup = document.querySelector('#list-group');
 
 const createListElement = (comment) => {
   const elListItem = document.createElement('div');
-  const elListItemContainer = document.createElement('div');
+  /* const elListItemContainer = document.createElement('div');
   const elListItemTitle = document.createElement('div');
   const elListItemText = document.createElement('span');
 
@@ -30,10 +30,30 @@ const createListElement = (comment) => {
 
   elListItemContainer.appendChild(elListItemTitle);
   elListItemContainer.appendChild(elListItemText);
-  elListItem.appendChild(elListItemContainer);
+  elListItem.appendChild(elListItemContainer); */
+
+  elListItem.insertAdjacentHTML(
+    "beforeend",
+    `<div class="list-group-item d-flex justify-content-between">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">
+          ${comment.email}
+        </div>
+        <span>${comment.body}</span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-sm btn-outline-danger text-uppercase delete-btn"
+        comment-id="${comment.id}"
+      >
+        delete
+      </button>
+    </div>`
+  );
 
   return elListItem;
 };
+
 
 const renderPost = async () => {
   // EDIT HERE
@@ -56,11 +76,36 @@ const renderPost = async () => {
     elCardAuthorName.textContent = author.name
     elCardAuthorName.href = `/author.html?author_id=${author.id}`
     elCardAuthorEmail.textContent = author.email
-
+    
     comments.map(comment => elListGroup.appendChild(createListElement(comment)))
+
+    /* // DELETE COMMENT
+    const elBtnDelete = document.querySelectorAll(".delete-btn")
+    console.log(elBtnDelete) */
+    
   } catch (error) {
     throw elNotFound.classList.remove("d-none")
   }
 };
 
 renderPost();
+
+const elFormComment = document.getElementById("form-new-comment")
+elFormComment.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const name = document.getElementById("namme")
+  const email = document.getElementById("email")
+  const body = document.getElementById("body")
+  const post_id = Number(params)
+
+  const comment = {
+    post_id: post_id,
+    name: name.value,
+    email: email.value,
+    body: body.value
+  }
+
+  createComment(comment)
+
+})

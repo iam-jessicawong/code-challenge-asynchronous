@@ -29,6 +29,8 @@ const createPostElement = (thumbnail, post) => {
       </div>
     </div>`
   );
+
+  return elCol
 };
 
 const renderPosts = async () => {
